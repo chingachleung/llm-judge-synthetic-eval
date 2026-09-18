@@ -1,5 +1,7 @@
 # llm-judge-synthetic-eval
 
+[![tests](https://github.com/chingachleung/llm-judge-synthetic-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/chingachleung/llm-judge-synthetic-eval/actions/workflows/tests.yml)
+
 A small, runnable pipeline for evaluating an LLM-backed (or any text-generating)
 system: expand a handful of hand-written seed questions into a larger synthetic
 test set, score a candidate system's answers against reference answers with a
@@ -58,6 +60,33 @@ python examples/run_demo.py
 ```
 
 No API key needed for the default run.
+
+### Example output
+
+```
+Expanded 3 seeds into 18 synthetic cases.
+
+Per-intent gap report (HeuristicJudge, TF-IDF lexical overlap):
+        account_access  n=6     accuracy=0%  pass_rate=100%  (correct=0 partial=6 incorrect=0)
+           performance  n=6     accuracy=0%  pass_rate=0%  (correct=0 partial=0 incorrect=6)
+               billing  n=6     accuracy=100%  pass_rate=100%  (correct=6 partial=0 incorrect=0)
+
+6 case(s) judged incorrect:
+  - [performance] Q: 'Why is the app running slowly on my device?'
+    candidate: 'Try restarting your device, that usually helps with most issues.'
+    verdict: incorrect (lexical-overlap similarity to reference = 0.02)
+  ...
+```
+
+This is the gap report doing its job: `billing` answers score cleanly
+(100% accuracy), `account_access` answers are correct paraphrases that the
+lexical-overlap judge only trusts enough to call "partially correct" (0%
+strict accuracy, but 100% pass rate — a real limitation of `HeuristicJudge`,
+discussed above), and every single `performance` answer is flagged
+incorrect because the mocked candidate system gives the same generic,
+off-target response regardless of the actual question. The per-intent
+breakdown makes that last, real gap immediately visible instead of burying
+it in a blended average.
 
 To try the LLM-backed judge for escalated cases instead:
 
