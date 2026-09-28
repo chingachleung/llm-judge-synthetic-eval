@@ -2,8 +2,7 @@
 
 Scenario: a small FAQ-answering system for a fictional software product. We
 have a handful of hand-written seed questions with known-correct reference
-answers, and a "candidate system" (mocked here, standing in for whatever
-system you're actually evaluating) that answers some of them well and some
+answers, and a "candidate system" that answers some of them well and some
 of them poorly. The point isn't the fictional Q&A content — it's the
 pipeline: expand a small seed set, score every case, and get a per-intent
 report that tells you *where* the candidate system is weak, not just an
