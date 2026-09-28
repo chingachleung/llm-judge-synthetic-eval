@@ -11,7 +11,7 @@ Two implementations:
   to categorical bins. Deterministic, zero-dependency, runs by default.
 - `LLMJudge`: real prompt + parsing logic for an actual LLM-as-judge call.
   Correct, complete, and NOT active by default (no bundled API key) — this
-  is what you'd swap in for real semantic judgment rather than lexical
+  is what you would swap in for real semantic judgment rather than lexical
   overlap.
 """
 from __future__ import annotations
