@@ -90,11 +90,6 @@ it in a blended average.
 
 To try the LLM-backed judge for escalated cases instead:
 
-```bash
-pip install anthropic
-export ANTHROPIC_API_KEY=sk-...
-```
-
 ```python
 from src import HeuristicJudge, LLMJudge, TieredJudge
 
